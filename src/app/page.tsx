@@ -1,95 +1,100 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
+import Image from "next/image";
+import "./page.css";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
+  const [file, setFile] = useState<File>();
+  const [fileName, setFileName] = useState<string>();
+
+  const handleSubmitImage = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!file) {
+      alert("Please select a picture");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("snake_image", file);
+
+    const response = await fetch("http://127.0.0.1:5000/upload", {
+      method: "POST",
+      mode: "cors",
+      body: formData,
+    });
+
+    const responseJson = await response.json();
+
+    router.push(`/upload?fileName=${fileName}`);
+  };
+
+  const handleUploadImage = (event: ChangeEvent<HTMLInputElement>) => {
+    const fileInput = event.target.files?.[0];
+    if (fileInput) {
+      setFile(fileInput);
+      setFileName(fileInput.name);
+    }
+  };
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
+    <>
+      <nav>
+        <h1 className="logo-text">Detect Venomous Snake</h1>
+      </nav>
+      <main>
+        <section className="camera-section">
+          <div className="box-img">
             <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
+              height={150}
+              width={150}
+              src="/img/snake.png"
+              alt="snake icon"
             />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+          </div>
+          <div className="box-text">
+            <div className="text-desc">
+              <h2>Turn on your camera</h2>
+              <p>Use your webcam to detect the venomous snake</p>
+            </div>
+            <button className="btn-red">Turn on camera</button>
+          </div>
+        </section>
+        <section className="upload-section">
+          <div className="box-img">
+            <Image
+              height={150}
+              width={150}
+              src="/img/upload.png"
+              alt="upload icon"
+            />
+          </div>
+          <div className="box-text">
+            <div className="text-desc">
+              <h2>Upload Picture</h2>
+              <p>Detect venomous snake from picture</p>
+            </div>
+            <form className="file-form" onSubmit={handleSubmitImage}>
+              <label htmlFor="snake_image" className="btn-blue">
+                Upload picture
+              </label>
+              <input
+                required
+                id="snake_image"
+                name="snake_image"
+                type="file"
+                accept="image/png, image/jpeg, image/jpg"
+                className="fileinput"
+                onChange={handleUploadImage}
+              />
+              <p id="showFile">{fileName}</p>
+              <button type="submit">Detect</button>
+            </form>
+          </div>
+        </section>
+      </main>
+    </>
+  );
 }

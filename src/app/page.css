@@ -1,0 +1,124 @@
+main {
+  width: 100%;
+  margin-top: 6rem;
+  height: 70dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rem;
+}
+
+.btn-red {
+  cursor: pointer;
+  padding: 8px;
+  color: white;
+  border: none;
+  background-color: #ff6961;
+  box-shadow: 10px 10px lightblue;
+  width: 70%;
+  transition: all 1s;
+}
+
+.btn-red:hover {
+  box-shadow: 0px 0px lightblue;
+}
+
+.fileinput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.file-form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 70%;
+  gap: 20px;
+}
+
+.btn-blue {
+  cursor: pointer;
+  padding: 8px;
+  color: black;
+  border: none;
+  background-color: #a7c7e7;
+  box-shadow: 10px 10px lightblue;
+  transition: all 1s;
+}
+
+.btn-blue:hover {
+  box-shadow: 0px 0px lightblue;
+}
+
+nav {
+  padding: 30px;
+  background-color: blue;
+}
+
+.logo-text {
+  margin: 0;
+  text-align: center;
+}
+
+section {
+  padding: 20px;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  width: 50%;
+  transition: all 0.5s ease-in-out;
+}
+
+section:hover {
+  outline: 15px solid #ffc40096;
+  border-radius: 2rem;
+}
+
+label,
+button,
+input,
+p {
+  font-size: 18px;
+}
+
+.box-img img {
+  height: 150px;
+  width: 150px;
+}
+
+.box-text {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (max-width: 820px) {
+  main {
+    width: 100%;
+    margin-top: 4rem;
+    height: 90dvh;
+    gap: 3rem;
+  }
+
+  section {
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    gap: 20px;
+  }
+
+  .btn-red {
+    width: 90%;
+  }
+
+  .file-form {
+    width: 90%;
+  }
+}
