@@ -2,18 +2,6 @@ import Link from "next/link";
 import "./page.css";
 import Image from "next/image";
 
-export const getPredictedImage = async (fileName: string | null) => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_SERVER_URL}/predict?fileName=${fileName}`,
-    {
-      method: "GET",
-      mode: "cors",
-    }
-  );
-  const responseJson = await response.json();
-  return responseJson;
-};
-
 export default async function Upload({
   searchParams,
 }: {
@@ -44,3 +32,15 @@ export default async function Upload({
     </>
   );
 }
+
+const getPredictedImage = async (fileName: string | null) => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/predict?fileName=${fileName}`,
+    {
+      method: "GET",
+      mode: "cors",
+    }
+  );
+  const responseJson = await response.json();
+  return responseJson;
+};
