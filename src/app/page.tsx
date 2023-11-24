@@ -20,11 +20,14 @@ export default function Home() {
     const formData = new FormData();
     formData.append("snake_image", file);
 
-    const response = await fetch("http://127.0.0.1:5000/upload", {
-      method: "POST",
-      mode: "cors",
-      body: formData,
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/upload`,
+      {
+        method: "POST",
+        mode: "cors",
+        body: formData,
+      }
+    );
 
     const responseJson = await response.json();
 
