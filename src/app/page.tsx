@@ -8,6 +8,7 @@ export default function Home() {
   const router = useRouter();
   const [file, setFile] = useState<File>();
   const [fileName, setFileName] = useState<string>();
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   const handleSubmitImage = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -16,6 +17,8 @@ export default function Home() {
       alert("Please select a picture");
       return;
     }
+
+    setIsSubmit(true);
 
     const formData = new FormData();
     formData.append("snake_image", file);
@@ -28,6 +31,8 @@ export default function Home() {
         body: formData,
       }
     );
+
+    setIsSubmit(false);
 
     const responseJson = await response.json();
 
@@ -93,7 +98,9 @@ export default function Home() {
                 onChange={handleUploadImage}
               />
               <p id="showFile">{fileName}</p>
-              <button type="submit">Detect</button>
+              <button disabled={isSubmit} type="submit">
+                {isSubmit ? "Uploading . . ." : "Detect"}
+              </button>
             </form>
           </div>
         </section>
