@@ -1,3 +1,15 @@
+"use client";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../../public/loadinng-animation.json";
+import "./loading.css";
+
 export default function Loading() {
-  return <h1>Predicting . . .</h1>;
+  return (
+    <main>
+      <Lottie animationData={loadingAnimation} loop />
+      <Lottie animationData={loadingAnimation} loop />
+      <p>We are predicting</p>
+      <p>Please wait</p>
+    </main>
+  );
 }
