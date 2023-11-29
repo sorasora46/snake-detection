@@ -9,6 +9,16 @@ export default async function Upload({
 }) {
   const fileName = String(searchParams?.fileName);
   const predictedImage = await getPredictedImage(fileName);
+  const nameArr = predictedImage.snake_name.split("_");
+  const genus = nameArr[0];
+  const species = nameArr[1];
+  const type =
+    nameArr[2] === "non" ? `${nameArr[2]}-${nameArr[3]}` : nameArr[2];
+  const conf = predictedImage.conf;
+
+  function toFirstUpperCase(str: string): string {
+    return str[0].toUpperCase() + str.substring(1);
+  }
 
   return (
     <>
@@ -21,8 +31,10 @@ export default async function Upload({
       <main>
         <h1>Predicting Result</h1>
         <div className="result-detail">
-          <p>{predictedImage.snake_name}</p>
-          <p>confidence: {predictedImage.conf}%</p>
+          <p>genus: {toFirstUpperCase(genus)}</p>
+          <p>species: {toFirstUpperCase(species)}</p>
+          <p>type: {toFirstUpperCase(type)}</p>
+          <p>confidence: {conf.toFixed(2)}%</p>
         </div>
         <div className="result">
           <Image
