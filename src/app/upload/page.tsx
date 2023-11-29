@@ -31,10 +31,18 @@ export default async function Upload({
       <main>
         <h1>Predicting Result</h1>
         <div className="result-detail">
-          <p>genus: {toFirstUpperCase(genus)}</p>
-          <p>species: {toFirstUpperCase(species)}</p>
-          <p>type: {toFirstUpperCase(type)}</p>
-          <p>confidence: {conf.toFixed(2)}%</p>
+          <p>
+            <span>genus</span>: {toFirstUpperCase(genus)}
+          </p>
+          <p>
+            <span>species</span>: {toFirstUpperCase(species)}
+          </p>
+          <p>
+            <span>type</span>: {toFirstUpperCase(type)}
+          </p>
+          <p>
+            <span>confidence</span>: {conf.toFixed(2)}%
+          </p>
         </div>
         <div className="result">
           <Image
