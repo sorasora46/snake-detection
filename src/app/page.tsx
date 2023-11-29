@@ -48,7 +48,7 @@ export default function Home() {
         <h1 className="logo-text">Detect Venomous Snake</h1>
       </nav>
       <main>
-        <section className="camera-section">
+        {/* <section className="camera-section">
           <div className="box-img">
             <Image
               height={150}
@@ -64,7 +64,7 @@ export default function Home() {
             </div>
             <button className="btn-red">Turn on camera</button>
           </div>
-        </section>
+        </section> */}
         <section className="upload-section">
           <div className="box-img">
             <Image
