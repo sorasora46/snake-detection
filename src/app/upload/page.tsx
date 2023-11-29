@@ -20,12 +20,16 @@ export default async function Upload({
       </nav>
       <main>
         <h1>Predicting Result</h1>
+        <div className="result-detail">
+          <p>{predictedImage.snake_name}</p>
+          <p>confidence: {predictedImage.conf}%</p>
+        </div>
         <div className="result">
           <Image
             src={`data:image/png;base64,${predictedImage.result}`}
             alt="predicted image"
-            width={predictedImage.width || 640}
-            height={predictedImage.height || 640}
+            width={640}
+            height={640}
           />
         </div>
       </main>
