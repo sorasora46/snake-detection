@@ -43,7 +43,7 @@ export default async function Upload({
 
     return (
       <>
-        <p>result.snake_name</p>
+        <p>{result.snake_name}</p>
       </>
     );
   }
